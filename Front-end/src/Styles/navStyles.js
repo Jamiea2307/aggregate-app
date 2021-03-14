@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const NavbarContainer = styled.div`
   height: 5rem;
   width: 100%;
+  display: flex;
   background-color: ${(props) => props.theme.navBar.background};
 `;
 

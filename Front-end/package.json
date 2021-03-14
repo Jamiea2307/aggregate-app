@@ -1,6 +1,7 @@
 {
   "homepage": "https://jamiea2307.github.io/news-app/",
   "name": "news-app",
+  "proxy": "http://localhost:4000",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
