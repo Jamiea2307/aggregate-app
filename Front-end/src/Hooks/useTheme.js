@@ -20,7 +20,6 @@ export const useTheme = () => {
 
   useEffect(() => {
     const localTheme = window.localStorage.getItem("theme");
-
     localTheme
       ? setTheme(localTheme)
       : window.localStorage.setItem("theme", themeType.Light);

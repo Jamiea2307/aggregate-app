@@ -1,22 +1,22 @@
 import { NavbarContainer, ListStyle } from "../../Styles/navStyles";
 import { useState, useContext, useEffect } from "react";
 import { AppContext } from "../../App";
-import { ReactComponent as Hackernews } from "../../Styles/Images/Y_Combinator_logo.svg";
-import { ReactComponent as Reddit } from "../../Styles/Images/Reddit_Mark_OnWhite.svg";
 import { sites } from "../../Data/sites";
+import Themechanger from "../../Components/Widgets/themeChanger";
+import { siteLogos } from "../../Utils/siteLogos";
 
-const NavBar = () => {
+const NavBar = (theme) => {
   const { dispatch } = useContext(AppContext);
-  const [activeButton, setactiveButton] = useState("");
+  const [activeButton, setActiveButton] = useState("");
 
   useEffect(() => {
     window.localStorage.selectedsite
-      ? setactiveButton(window.localStorage.selectedsite)
-      : setactiveButton(sites.HackerNews);
+      ? setActiveButton(window.localStorage.selectedsite)
+      : setActiveButton(sites.HackerNews);
   }, []);
 
   const changeSiteValue = (currentSite) => {
-    setactiveButton(currentSite);
+    setActiveButton(currentSite);
     window.localStorage.setItem("selectedsite", currentSite);
     dispatch({ type: "UPDATE_SITE", data: currentSite });
   };
@@ -24,19 +24,18 @@ const NavBar = () => {
   return (
     <NavbarContainer>
       <ListStyle>
-        <button
-          className={activeButton === sites.HackerNews ? "selected" : null}
-          onClick={() => changeSiteValue(sites.HackerNews)}
-        >
-          <Hackernews />
-        </button>
-        <button
-          className={activeButton === sites.Reddit ? "selected" : null}
-          onClick={() => changeSiteValue(sites.Reddit)}
-        >
-          <Reddit />
-        </button>
+        {Object.values(sites).map((site) => {
+          return (
+            <button
+              className={activeButton === site ? "selected" : null}
+              onClick={() => changeSiteValue(site)}
+            >
+              {siteLogos[site]}
+            </button>
+          );
+        })}
       </ListStyle>
+      <Themechanger themes={theme.theme} />
     </NavbarContainer>
   );
 };
