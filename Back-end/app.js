@@ -5,9 +5,8 @@ const logger = require("morgan");
 require("dotenv").config();
 
 //Route imports
-// const indexRouter = require("./routes/index");
-// const usersRouter = require("./routes/users");
 const redditRouter = require("./routes/redditStories");
+const hackerNewsRouter = require("./routes/hnStories");
 
 const app = express();
 
@@ -18,8 +17,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 //Route Middleware
-// app.use("/", indexRouter);
-// app.use("/users", usersRouter);
 app.use("/api/redditStories", redditRouter);
+app.use("/api/hnStories", hackerNewsRouter);
 
 module.exports = app;

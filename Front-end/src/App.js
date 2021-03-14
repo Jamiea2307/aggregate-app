@@ -10,6 +10,8 @@ import { sites } from "./Data/sites";
 import { CommentsContainer } from "./Components/Comments/commentsContainer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+import { ReactComponent as Moon } from "./Styles/Images/Moon.svg";
+import { ReactComponent as Sun } from "./Styles/Images/Sun.svg";
 
 export const AppContext = createContext();
 
@@ -32,7 +34,9 @@ const App = () => {
           <Switch>
             <Route path={["/", "/news-app"]} exact>
               <NavBar />
-              <CheckboxInput onClick={toggleTheme}>{theme} Theme</CheckboxInput>
+              <CheckboxInput onClick={toggleTheme}>
+                {theme === "Dark" ? <Sun /> : <Moon />}
+              </CheckboxInput>
               <PostsContainer selectedSite={{ state }} />
             </Route>
             <Route path="/comments/:id" component={CommentsContainer} />
